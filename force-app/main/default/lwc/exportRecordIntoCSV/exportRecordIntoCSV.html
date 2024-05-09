@@ -1,0 +1,21 @@
+<template>
+   
+    <lightning-quick-action-panel style="background: lightsteelblue;">
+        <center>
+            <h2 style=" font-size: 2rem;text-align: center;font-family: serif;">𝐄𝐱𝐩𝐨𝐫𝐭 𝐂𝐨𝐧𝐭𝐚𝐜𝐭</h2>
+          </center>
+          <lightning-combobox name="types" label="𝐒𝐞𝐥𝐞𝐜𝐭 𝐋𝐢𝐬𝐭 𝐕𝐢𝐞𝐰" value={value} options={TypeOptions} onchange={HandleChange}> </lightning-combobox> 
+
+          <div class="slds-align_absolute-center" style=" height: 9rem; ">
+            <lightning-button-group>
+              <span style="margin-right:20px;    margin-top: 10px;">
+           <lightning-button  variant="destructive" label="𝐂𝐚𝐧𝐜𝐞𝐥" onclick={closeQuickAction} class="slds-m-top_small slds-m-bottom_medium slds-m-left_x-small" ></lightning-button> 
+              </span>
+              <span style="    margin-top: 10px;">
+          <lightning-button icon-name="utility:download" label="𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝 𝐂𝐒𝐕" onclick={downloadCSVFileRecordData} variant="brand" slot="actions"></lightning-button>
+              </span>
+            </lightning-button-group>
+          </div> 
+    </lightning-quick-action-panel>
+
+</template>

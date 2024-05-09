@@ -1,0 +1,366 @@
+<apex:page applyHtmlTag="false" docType="html-5.0" applyBodyTag="false" showHeader="false" sidebar="false" standardController="Quote_C__c" renderAs="pdf" extensions="ALS_NewQuote_pdf_controller">
+    <html>
+        <head>
+            <style>
+                @page {
+                margin-top: 3.3cm;
+                margin-bottom:3cm;
+                margin-left: 1cm;
+                margin-right: 1cm;
+                
+                @top-center {
+                content: element(header);
+                }
+                @bottom-left {
+                content: element(footer);
+                }
+                }
+                
+                div.header {
+                padding: 10px;
+                position: running(header);
+                }
+                div.footer {
+                display: block;
+                padding: 5px;
+                position: running(footer);
+                }
+                .pagenumber:before {
+                content: counter(page);
+                }
+                .pagecount:before {
+                content: counter(pages);
+                }
+                div.content {
+                border-style:dotted;
+                float: left;
+                width: 100%;
+                }
+                table {
+                border-collapse: collapse;
+                width: 100%;
+                }
+                
+                th, td {
+                border: 1px solid black;
+                padding: 8px;
+                text-align: left;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="footer" style="margin-left: auto; margin-right: auto;">
+                <div class="number" Style="float:right; font-family: Arial Unicode MS; font-size: 9px;">Page <span class="pagenumber"/> of <span class="pagecount"/></div>
+                <br/>
+                <hr style="border-top: 1px solid #20B2AA;" />
+                <div class="left-footer" style="float: left; font-family: Arial Unicode MS;font-size: 9px; color: #888; user-select: none;text-align:left">Right Solutions . Right Partner</div>
+                <div class="right-footer" style="float: right; font-family: Arial Unicode MS;font-size: 9px; color: navy; user-select: none;text-align:right">
+                    <a href="http://www.alsglobal.com" target="_blank" style="color: navy; text-decoration: none;font-family: Arial Unicode MS;font-size: 9px;">alsglobal.com</a><br/>
+                    <a href="http://www.alsglobal.com" target="_blank" style="color: navy; text-decoration: none;font-family: Arial Unicode MS;font-size: 9px;">analyticalsolutions.in</a>
+                </div>
+            </div>
+            <div class="header">               
+                <div style="display: inline-block; width: 100%; margin: 1rem; padding: 2rem 2rem; padding-top: 10px;font-family: Arial Unicode MS;">
+                    <div style="display: inline-block; padding: 2rem 2rem; vertical-align: middle; float: left; width: 70%;">
+                        <apex:image url="{!$Resource.Als_NewMumbai_Logo}" width="300" height="80" /><br/>
+                    </div>
+                    <div style="display: inline-block; padding: 2rem 2rem; vertical-align: middle; float: left; width: 30%; font-family: Arial Unicode MS;font-size: 9px;line-height: 1.5;text-align:right">
+                        <span>
+                            Analytical Solutions<br />
+                            (A Div. of Indtech Instruments Pvt. Ltd.)<br />
+                            B-22 MIDC, TTC Ind. Area<br />
+                            Navi Mumbai – 400708. India<br />
+                            T: +91 22 6197 0000<br/>
+                            CIN No.: U31909MH1991PTC061868
+                        </span>
+                    </div>
+                </div>
+                <hr style="border-top: 1px solid #D3D3D3;" />   
+            </div>
+        </body>
+        <div style="display: inline-block; width: 100%; margin: 1rem; padding: 2rem 2rem; font-size: 9px;">
+            <div style="display: inline-block; padding: 2rem 2rem; vertical-align: middle; float: left; width: 55%;">
+                <table style="">
+                    <tr>
+                        <td style="padding-bottom: 10px;white-space: nowrap;border:none;"><strong>Customer Name</strong> </td>
+                        <td style="border:none;font-family: Arial Unicode MS;"><span style="font-weight: normal;white-space: normal;margin-right: 100px;">{!quote.AccountId__r.Name}</span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top: 10px;white-space: nowrap;border:none"><span style="font-weight: bold;"><b>Customer Address</b></span></td>
+                        <td style="border:none;font-family: Arial Unicode MS;"><span style="font-weight: normal;border:none;">{!quote.OpportunityId__r.Billing_Address__Street__s}, {!quote.OpportunityId__r.Billing_Address__City__s}, {!quote.OpportunityId__r.Billing_Address__StateCode__s}
+                            
+                            
+                            <apex:outputText rendered="{!quote.OpportunityId__r.Billing_Address__PostalCode__s != null}">
+                                -{!quote.OpportunityId__r.Billing_Address__PostalCode__s},
+                            </apex:outputText>
+                            
+                            <br/>
+                            {!countryFullName}.
+                            </span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 10px;white-space: nowrap;border:none"><span><b>Contact Person</b></span></td>
+                        <td style="padding-bottom: 10px;border:none;font-family: Arial Unicode MS;"><span style="font-weight: normal;white-space: normal;">{!quote.ContactId__r.Name}</span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 10px;white-space: nowrap;border:none"><span><b>Contact Mobile</b></span></td>
+                        <td style="padding-bottom: 10px;white-space: nowrap; border:none;font-family: Arial Unicode MS;"><span style="font-weight: normal;">{!quote.ContactId__r.Phone}</span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 10px;white-space: nowrap;border:none"><span><b>Email ID</b></span></td>
+                        <td style="padding-bottom: 10px;white-space: nowrap; border:none;font-family: Arial Unicode MS;"><span style="font-weight: normal;">{!quote.ContactId__r.Email}</span></td>
+                    </tr>
+                    <!--tr>
+                        <td style="padding-bottom: 10px; white-space: nowrap;border:none"><span><b>Account Manager</b></span></td>
+                        <td style="padding-bottom: 10px; border:none"><span style="font-weight: normal;white-space: normal;">{!quote.OpportunityId__r.CreatedBy.Name}</span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 10px; white-space: nowrap;border:none"><span><b>Contact Number</b></span></td>
+                        <td style="padding-bottom: 10px; white-space: nowrap;border:none"><span style="font-weight: normal;">{!quote.OpportunityId__r.CreatedBy.MobilePhone}</span></td>
+                    </tr-->
+                </table>
+            </div>
+            <div style="display: inline-block; padding: 2rem 2rem; vertical-align: middle; float: left; width: 45%;">
+                <table style="">
+                    <tr>
+                        <td style="padding-bottom: 10px;white-space: nowrap;border:none"><span><b>Quotation No.</b> </span></td>
+                        <td style="padding-bottom: 10px;border:none;font-family: Arial Unicode MS;"><span style="font-weight: normal;word-wrap: break-all;margin-left:-40px;">{!quote.Name}{!pdfVersion}</span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 10px;white-space: nowrap;border:none"><span><b>Quotation Date</b></span></td>
+                        <td style="padding-bottom: 10px;white-space: nowrap; border:none;font-family: Arial Unicode MS;"><span style="font-weight: normal;margin-left:-40px;">
+                                <!-- {!DAY(TODAY())}/{!MONTH(TODAY())}/{!YEAR(TODAY())} -->
+                                <apex:outputText value="{!DAY(TODAY())}/{!LPAD(TEXT(MONTH(TODAY())), 2, '0')}/{!YEAR(TODAY())}" />
+                            </span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 10px; white-space: nowrap;border:none"><span><b>Valid Upto</b></span></td>
+                        <td style="padding-bottom: 10px; white-space: nowrap;border:none;font-family: Arial Unicode MS;"><span style="font-weight: normal;margin-left:-40px;"><apex:outputText value="{0, date,dd/MM/yyyy}"><apex:param value="{!quote.Quote_Validity1__c}" /></apex:outputText></span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 10px;white-space: nowrap;border:none"><span><b>Account Manager</b> </span></td>
+                        <td style="padding-bottom: 10px;border:none;font-family: Arial Unicode MS;"><span style="font-weight: normal;word-wrap: break-all;margin-left:-40px;">{!quote.OpportunityId__r.CreatedBy.Name}</span></td>
+                    </tr>
+                    <tr>
+                        <td style="padding-bottom: 10px;white-space: nowrap;border:none"><span><b>Contact Number</b> </span></td>
+                        <td style="padding-bottom: 10px;border:none;font-family: Arial Unicode MS;"><span style="font-weight: normal;word-wrap: break-all;margin-left:-40px;">{!quote.OpportunityId__r.CreatedBy.MobilePhone}</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <br/>
+        <div style = "font-size: 9px;margin-top:10px">
+            <span><b>Subject : </b></span>
+            <span style="margin-left: 5px;font-family: Arial Unicode MS;">{!quote.Subject__c}</span>
+        </div>
+        <div style = "font-family:Arial Unicode MS;font-size: 9px;margin-top:10px">
+            <span>{!information.Information_1__c}</span>
+        </div>
+        <div style="font-family:Arial Unicode MS;font-size: 9px;">
+            <span style="display: block;">
+                <br/>
+                The prices and conditions apply to samples submitted to:
+                <br/><br/>
+                Analytical Solutions<br />
+                (A division of Indtech Instruments Private Limited)<br />
+                B-22, MIDC, TTC Ind. Area<br />
+                Navi Mumbai 400708. India<br />
+            </span>
+        </div>
+        <div style = "font-family:Arial Unicode MS;font-size: 9px;margin-top:20px">
+            <span class="content" style="display: block;margin-bottom: 10px;">{!mumbaiInfo.Information1__c}</span>
+        </div>
+        <div style = "font-family:Arial Unicode MS;font-size: 9px;margin-top:20px">
+            <span class="content" style="display: block;margin-bottom: 10px;">{!mumbaiInfo.Information2__c}</span>
+        </div>
+        <div style = "font-size: 9px;margin-top:10px">
+            
+            <div style="margin-bottom: 5px;"><strong>A. Sample material / logistics</strong></div>
+            <span class="content" style="display: block;font-family: Arial Unicode MS;">{!mumbaiInfo.Sample_material_1__c}</span><br/>
+            <span class="content" style="display: block;font-family: Arial Unicode MS;">{!mumbaiInfo.Sample_Material_2__c}</span>
+            
+            <div style="margin-bottom: 5px; margin-top: 10px;"><strong>B. Analytical Investigations / OOS / Deviations</strong></div>
+            <span class="content" style="display: block;font-family: Arial Unicode MS;">{!mumbaiInfo.Analytical_Investigation__c}</span>
+            
+            <div style="margin-bottom: 5px; margin-top: 10px;"><strong>C. Documentation </strong></div>
+            <span class="content" style="display: block;font-family: Arial Unicode MS;">{!mumbaiInfo.Documentation__c}</span>
+            <div style="margin-bottom: 5px; margin-top: 10px;"><strong>D. Turnaround time</strong></div>
+            <span class="content" style="display: block;font-family: Arial Unicode MS;">{!mumbaiInfo.Turnaround_time__c}</span>
+            <div style="margin-bottom: 5px; margin-top: 10px;"><strong>E. Health, Safety and Environment – Hazardous Samples</strong> </div>
+            <span class="content" style="display: block;margin-bottom: 5px;font-family: Arial Unicode MS;">{!mumbaiInfo.Health_Safety_and_Environment__c}
+                <ul style="margin-left: 20px; list-style-type: disc;font-family: Arial Unicode MS;">
+                    <li>Extreme pH values</li>
+                    <li>Potential Impurities present at concentrations greater than 10%</li>
+                    <li>Strong or noxious odors, vapors</li>
+                    <li>Asbestos</li>
+                    <li>Highly Saline Water</li>
+                    <li>Biological hazards</li>
+                </ul>      
+            </span> 
+            <div style="page-break-after: always"/>
+            <div style="margin-bottom: 5px;"><u><strong>Notes</strong></u></div>
+            <span class="content" style="font-family: Arial Unicode MS;">{!mumbaiInfo.Notes__c}</span>
+        </div>
+        <table style="border-collapse: collapse;margin-top: 20px; margin-bottom: 10px;">
+            <tr>
+                <th style="text-align: center; border: 1px solid black;font-size: 9px;">Sr No.</th>
+                <th style="text-align: center; border: 1px solid black;font-size: 9px;">Test Code &amp; Method</th>
+                <th style="text-align: center; border: 1px solid black;font-size: 9px;">Test Name</th>                    
+                <th style="text-align: center; border: 1px solid black;font-size: 9px;">Quantity</th>
+                <th style="text-align: center; border: 1px solid black;font-size: 9px;">Rate</th>
+                <th style="text-align: center; border: 1px solid black;font-size: 9px;">Amount</th>
+            </tr>
+            <apex:variable value="{!0}" var="counter"/>
+            <apex:variable value="{!0.0}" var="totalAmount"/>
+            <apex:repeat value="{!quoteLineItems}" var="qli">
+                <tr>
+                    <td style="text-align: center; border: 1px solid black;font-size: 9px;font-family: Arial Unicode MS;">{!counter + 1}</td>
+                    <td style="text-align: left; border: 1px solid black;font-size: 9px;font-family: Arial Unicode MS;">
+                        Test Code : {!qli.Product_Code__c}<br/>
+                        Method :
+                        <apex:outputPanel style="font-family:Arial Unicode MS;"><apex:outputText value="{!qli.Test_Method__c}" escape="false"/></apex:outputPanel> 
+                    </td>
+                    <td style="text-align: center; border: 1px solid black;font-size: 9px;font-family: Arial Unicode MS;">{!qli.ProductId__r.Name}</td>                       
+                    <td style="text-align: center; border: 1px solid black;font-size: 9px;font-family: Arial Unicode MS;">{!ROUND(qli.Quantity__c, 0)}</td>
+                    <!-- <td style="text-align: center; border: 1px solid black;font-size: 9px;">{!ROUND(qli.Sales_Price__c, 2)}</td-->
+                    <td style="text-align: center; border: 1px solid black; font-size: 9px;font-family: Arial Unicode MS;">
+                        <apex:outputText value="{0, number, #,##,##0.00}">
+                            <apex:param value="{!qli.Sales_Price__c}" />
+                        </apex:outputText>
+                    </td>
+
+                    <!-- <td style="text-align: center; border: 1px solid black;font-size: 9px;">{!ROUND(qli.Subtotal__c, 2)}</td-->
+                    <td style="text-align: center; border: 1px solid black; font-size: 9px;font-family: Arial Unicode MS;">
+                        <apex:outputText value="{0, number, #,##,##0.00}">
+                            <apex:param value="{!qli.Subtotal__c}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <apex:variable var="counter" value="{!counter + 1}"/>
+                <apex:variable var="totalAmount" value="{!totalAmount + qli.Total_Price__c}"/>
+            </apex:repeat>
+            <tr>
+                <td colspan="5" style="border:1px solid black;border-collapse: collapse; text-align: right;font-size: 9px;"><b> <span >Total ({!quote.CurrencyIsoCode}) </span></b></td>
+                <td style="border:1px solid black;border-collapse: collapse;font-size: 9px;font-family: Arial Unicode MS;text-align: center;"><!--{!totalAmount}-->
+                    <apex:outputText value="{0, number, #,##,##0.00}">
+                        <apex:param value="{!totalAmount}" />
+                    </apex:outputText>
+                </td>
+            </tr>
+            
+            <apex:outputText rendered="{!Quote.Include_Discount__c == true}">
+                <tr>
+                    <td colspan="5" style="border:1px solid black;border-collapse: collapse; text-align: right;font-size: 9px;"><b> <span >Discount (%) ({!ROUND(discountPercentage, 0)}%)</span></b></td>
+                    <td style="border:1px solid black;border-collapse: collapse;font-size: 9px;font-family: Arial Unicode MS;text-align: center;"><!--{!discountAmount}-->
+                        <apex:outputText value="{0, number, #,##,##0.00}">
+                            <apex:param value="{!discountAmount}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+            </apex:outputText>
+            <apex:outputText rendered="{!Quote.Include_GST__c == true}">
+                <tr>
+                    <td colspan="5" style="border:1px solid black;border-collapse: collapse; text-align: right;font-size: 9px;"><b> <span >GST (%) ({!ROUND(gstPercentage, 0)}%)</span></b></td>
+                    <td style="border:1px solid black;border-collapse: collapse;font-size: 9px;font-family: Arial Unicode MS;text-align: center;"><!--{!gstAmount}-->
+                        <apex:outputText value="{0, number, #,##,##0.00}">
+                            <apex:param value="{!gstAmount}" />
+                        </apex:outputText>
+                    </td>
+                </tr>
+            </apex:outputText>
+            
+            <tr>
+                <td colspan="5" style="border:1px solid black;border-collapse: collapse; text-align: right;font-size: 9px;">
+                    <b>Grand Total ({!quote.CurrencyIsoCode})</b>
+                </td>
+                <td style="border:1px solid black;border-collapse: collapse;font-size: 9px;font-family: Arial Unicode MS;text-align: center;">
+                    <!--{!grandTotal}-->
+                    <apex:outputText value="{0, number, #,##,##0.00}">
+                            <apex:param value="{!grandTotal}" />
+                        </apex:outputText>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7" style="text-align: left; border: 1px solid black;font-size: 9px;"><b>Amount In Word: </b>&nbsp;<span style="font-family: Arial Unicode MS;">{!quote.CurrencyIsoCode} {!totalAmountWords} Only </span></td>
+            </tr>
+            <apex:outputText rendered="{!quote.Sample_Quantity__c !=null}" escape="false">
+                    <tr>
+                        <td colspan="7" style="font-size: 9px;"> <b>Sample Quantity : </b><apex:outputText value="{!quote.Sample_Quantity__c}" escape="false" /> </td>
+                    </tr>
+                </apex:outputText>
+                <apex:outputText rendered="{!quote.TAT__c !=null}" escape="false">
+                    <tr>
+                        <td colspan="7" style="font-size: 9px;"> <b>TAT : </b><apex:outputText value="{!quote.TAT__c}" escape="false" /></td>
+                    </tr>
+                </apex:outputText>
+                <apex:outputText rendered="{!quote.Sample_Requirement__c !=null}" escape="false">
+                    <tr>
+                        <td colspan="7" style="font-size: 9px;"><b>Requirement from Study Sponsor : </b><apex:outputText value="{!quote.Sample_Requirement__c}" escape="false" /></td>
+                    </tr>
+                </apex:outputText>
+                <apex:outputText rendered="{!quote.Note__c !=null}" escape="false">
+                    <tr>
+                        <td colspan="7" style="font-size: 9px;"><b>Additional Notes : </b><apex:outputText value="{!quote.Note__c}" escape="false" /></td>
+                    </tr>
+                </apex:outputText>
+        </table>
+        <div class="center-text" style="margin-bottom: 10px;margin-top: 20px;font-size: 9px;"><u><strong>General Terms and Condition</strong></u></div>
+        <div style="font-family:Arial Unicode MS;font-size: 9px;">
+            <span style="display: block; margin-bottom: 5px">{!mumbaiInfo.General_Terms_and_Con1__c}</span>
+            <span style="display: block; margin-bottom: 5px">{!mumbaiInfo.General_Terms_and_Con2__c}</span>
+            <span style="display: block; margin-bottom: 5px">{!mumbaiInfo.General_Terms_and_Con3__c}</span>
+            <span style="display: block; margin-bottom: 5px">{!mumbaiInfo.General_Terms_and_Con4__c}</span>
+        </div>
+        
+        <div class="center-text" style="margin-bottom: 10px;margin-top: 15px;font-size: 9px;"><u><strong>Bank Details</strong></u></div>
+            <div style="display: inline-block;font-family:Arial Unicode MS;font-size: 9px;">
+                <span style="display: block; margin-bottom: 5px"><strong>Name of Beneficiary:</strong> {!mumbaiInfo.Name_of_Beneficiary__c}</span>
+                <span style="display: block; margin-bottom: 5px"><strong>Bank Name: {!mumbaiInfo.Bank_Name__c}</strong></span>
+                <span style="display: block; margin-bottom: 5px"><strong>Address:</strong> 
+                    Midtown Co-op. Hsg. Society,Plot No-A-005, Sector-9,<br/>
+                        <span style="margin-left:43px">Airoli Mulund highway, Airoli Navi Mumbai -400708,</span><br/>
+                        <span style="margin-left:43px">Maharashtra.</span>
+                </span>
+                <span style="display: block; margin-bottom: 5px"><strong>Bank Account Type:</strong> {!mumbaiInfo.Bank_Account_Type__c}</span> 
+                <span style="display: block; margin-bottom: 5px"><strong>Bank Account Number:</strong> {!mumbaiInfo.Bank_Account_Number__c}</span>
+                <span style="display: block; margin-bottom: 10px"><strong>IFSC Code:</strong> {!mumbaiInfo.IFSC_Code__c}</span>
+                <span style="display: block;"><strong>GST Number-</strong> {!mumbaiInfo.GST_Number__c}</span>
+            </div>
+        <div class="center-text" style="margin-bottom: 10px; margin-top: 30px;font-size: 9px;"><u><strong>Payment</strong></u></div>
+            <div style = "font-family:Arial Unicode MS;font-size: 9px;">
+                <span style="display: block; margin-bottom: 5px">{!mumbaiInfo.Payment1__c}</span>
+                <span style="display: block; margin-bottom: 5px">{!mumbaiInfo.Payment2__c}</span>
+        </div>
+        <div class="center-text" style="text-align: center ;margin-bottom: 10px;margin-top: 30px;font-size: 9px;"><u><strong>Analytical Solutions - Terms &amp; Conditions</strong></u></div>
+            <div style="font-family:Arial Unicode MS;font-size: 9px;">
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_1__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_2__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_3__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_4__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_5__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_6__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_7__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_8__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_9__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_10__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_11__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_12__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_13__c}</span>  
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_14__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_15__c}</span>
+                <div style="margin-left: 20px;">
+                    <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_15_1__c}</span>
+                    <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_15_2__c}</span>
+                    <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_15_3__c}</span>
+                    
+                </div>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_16__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_17__c}</span>
+                <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_18__c}</span>
+                <div style="margin-left: 20px;">
+                    <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_18_1__c}</span>
+                    <span style="display: block;margin-bottom: 10px;">{!mumbaiTermsandCons.Term_18_2__c}</span>
+                </div>
+            </div>
+    </html>
+</apex:page>

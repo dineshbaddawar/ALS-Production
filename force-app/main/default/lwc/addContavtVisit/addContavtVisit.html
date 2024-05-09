@@ -1,0 +1,24 @@
+<template>
+   
+     <lightning-quick-action-panel style="background: lightsteelblue;">
+          <center>
+               <h2 style=" font-size: 2rem;text-align: center;font-family: serif;"> Add Contact</h2>
+             </center>
+
+          <lightning-combobox label="Select Contact" placeholder="Choose Contact" value={value} onchange={handleChange} options={statusOptions}>
+      </lightning-combobox>
+
+      <div class="slds-align_absolute-center">
+          <lightning-button-group>
+            <span style="margin-right:20px;    margin-top: 10px;">
+         <lightning-button  variant="Neutral" label="Cancel" onclick={closeQuickAction} class="slds-m-top_small slds-m-bottom_medium slds-m-left_x-small" ></lightning-button> 
+            </span>
+            <span style="    margin-top: 10px;">
+        <lightning-button variant="brand" label="Save" onclick={HandleSumbit} class="slds-m-top_small slds-m-bottom_medium" ></lightning-button>                    
+            </span>
+          </lightning-button-group>
+        </div> 
+     </lightning-quick-action-panel>
+         
+     
+</template>

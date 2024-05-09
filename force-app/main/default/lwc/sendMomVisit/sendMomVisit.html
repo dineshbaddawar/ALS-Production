@@ -1,0 +1,25 @@
+<template>
+     <div>
+                 <center style="background: cornflowerblue; font-size: 20px; padding: 5px;"><b>Send MOM</b></center>
+                 <div class="slds-modal__content slds-p-around_medium alignLeft" id="modal-content-id-1">
+                     <div class="row">
+                         <lightning-input type="text" label="Subject" name="subject" required placeholder="Enter subject..." onchange={handleChange}></lightning-input>
+                         <lightning-input type="email" label="Stakeholder Email" name="email" required placeholder="Enter email..." onchange={handleChange}></lightning-input>
+                         <c-userlookup onsendidtoaura={handleLwcEvent}></c-userlookup>
+                         <lightning-textarea label="Mom Description" name="description" placeholder="Enter description..." onchange={handleChange}></lightning-textarea>
+                     </div>
+                 </div>
+                 <footer class="slds-modal__footer">
+                     <div class="slds-align_absolute-center">
+                         <lightning-button-group>
+                           <span style="margin-right:20px;    margin-top: 10px;">
+                        <lightning-button  variant="Neutral" label="Cancel" onclick={closeModal} class="slds-m-top_small slds-m-bottom_medium slds-m-left_x-small" ></lightning-button> 
+                           </span>
+                           <span style="margin-top: 10px;">
+                       <lightning-button variant="brand" label="Submit" onclick={SendMomActivity} class="slds-m-top_small slds-m-bottom_medium" ></lightning-button>                    
+                           </span>
+                         </lightning-button-group>
+                       </div> 
+                 </footer>
+     </div>
+ </template>
